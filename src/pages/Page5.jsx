@@ -10,7 +10,7 @@ const options = [
   { id: 'cong-vien', label: 'Công viên', img: '/img/cong.jpg' },
 ];
 
-export default function Page4() {
+export default function Page5() {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
@@ -36,12 +36,12 @@ export default function Page4() {
     }
 
     const payload = { selected, movieChoice: canShowMovieOptions ? movieChoice : undefined };
-    localStorage.setItem('page4Choice', JSON.stringify(payload));
+    localStorage.setItem('page5Choice', JSON.stringify(payload));
     navigate('/page6', { state: payload });
   };
 
   return (
-    <section className="page page4">
+    <section className="page page5">
       <h1>Em muốn chúng ta đi đâuuu</h1>
       
 

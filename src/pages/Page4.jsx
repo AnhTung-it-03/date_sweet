@@ -12,11 +12,11 @@ const foods = [
   { id: 'ca-vien-chien', label: 'Xiên Bẩn', img: '/img/xien_ban.jpg' },
 ];
 
-export default function Page5() {
+export default function Page4() {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('page5Food');
+    const saved = localStorage.getItem('page4Food');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -32,7 +32,7 @@ export default function Page5() {
 
   const clearSelection = () => {
     setSelected([]);
-    localStorage.removeItem('page5Food');
+    localStorage.removeItem('page4Food');
   };
 
   const toggle = (id) => {
