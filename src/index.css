@@ -140,6 +140,7 @@ h1, h2, h3 { color: #d83a70; }
 }
 
 .btn-center {
+  
   display: flex;
   justify-content: center;
   gap: 12px;
