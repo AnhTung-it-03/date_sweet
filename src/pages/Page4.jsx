@@ -79,8 +79,8 @@ export default function Page4() {
       </div>
 
       <div style={{ marginTop: '12px' }}>
-        <button onClick={goNext} className="finish-btn" type="button">
-          Tiếp UWU
+         <button className="btn-primary" onClick={() => navigate('/page4')} >
+      <Link className='pr' to="/page5">Ấn vào đây nè bée ơi UWU</Link>
         </button>
       </div>
 

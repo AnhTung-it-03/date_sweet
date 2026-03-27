@@ -6,7 +6,7 @@ export default function Page2() {
       <p className='hint'>Then Kiu bấy biiì</p>
       <div className="pager">
         <img 
-        src="public/gift/smile.gif"
+        src="/gift/smile.gif"
         alt="Mèo Pleeease"
         className="okey-img"
       />

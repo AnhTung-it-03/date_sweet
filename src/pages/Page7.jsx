@@ -53,6 +53,23 @@ export default function Page7() {
 
   const grouped = groupByDate(itineraries);
 
+  // Only display if user is logged in
+  if (!user) {
+    return (
+      <section className="page page7">
+        <h1>Tất cả lịch đi chơi theo ngày</h1>
+        <div style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center', padding: '40px 10px' }}>
+          <p style={{ fontSize: '18px', color: '#666' }}>
+            Vui lòng <strong>đăng nhập</strong> để xem cơ sở dữ liệu lịch của bạn.
+          </p>
+          <Link to="/" style={{ color: '#ff1493', textDecoration: 'underline', fontSize: '16px' }}>
+            Quay lại trang chủ
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="page page7">
       <h1>Tất cả lịch đi chơi theo ngày</h1>
@@ -91,7 +108,7 @@ export default function Page7() {
         )}
       </div>
 
-      {user ? (
+      {user && (
         <div style={{ marginTop: '10px' }}>
           <button onClick={deleteSelected} disabled={selected.size === 0} style={{ background: '#ef476f', color: '#fff', border: 'none', borderRadius: '8px', padding: '8px 14px', cursor: selected.size > 0 ? 'pointer' : 'not-allowed', marginRight: '10px' }}>
             Xóa đã chọn ({selected.size})
@@ -100,8 +117,6 @@ export default function Page7() {
             Xóa tất cả Page 7
           </button>
         </div>
-      ) : (
-        <p style={{ marginTop: '10px', color: '#666' }}>Đăng nhập để có quyền xóa lịch.</p>
       )}
     </section>
   );

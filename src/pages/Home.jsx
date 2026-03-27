@@ -27,7 +27,7 @@ export default function Home() {
 
       </div>
       <img
-        src="public/gift/plesase_cat.gif"
+        src="/gift/plesase_cat.gif"
         alt="Mèo Pleeease"
         className="hero-img"
       />

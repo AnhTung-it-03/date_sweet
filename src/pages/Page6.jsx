@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { useNavigate } from "react-router-dom";
 
 export default function Page6() {
   const { user } = useAuth();
@@ -9,7 +10,7 @@ export default function Page6() {
   const [page4Choice, setPage4Choice] = useState(null);
   const [page5Food, setPage5Food] = useState([]);
   const [savedItineraries, setSavedItineraries] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const c3 = localStorage.getItem('page3Calendar');
     if (c3) setPage3Calendar(JSON.parse(c3));
@@ -59,7 +60,7 @@ export default function Page6() {
     setSavedItineraries(merged);
     alert('Xác nhận xong! Lịch sẽ được lưu trong Trang 7.');
   };
-
+  
   return (
     <section className="page page6">
       <h1>Bé xác nhận lại lịch nhé </h1>
@@ -119,9 +120,21 @@ export default function Page6() {
       </section>
 
       <div className="paper" style={{ marginTop: '18px' }}>
-      <button  style={{ marginTop: '14px', padding: '10px 16px', borderRadius: '8px', background: '#ff5a91', color: '#fff', border: 'none', cursor: 'pointer' }} onClick={() => window.location.href = '/page3'}>Bé muốn sửa lịch ạ</button>
-        <span style={{ margin: '0 8px' }}></span>
-        <button  style={{ marginTop: '14px', padding: '10px 16px', borderRadius: '8px', background: '#ff5a91', color: '#fff', border: 'none', cursor: 'pointer' }} onClick={() => window.location.href = '/page7'}>Bé muốn xem tất cả lịch </button>
+     <button
+        style={{ marginTop: '14px', padding: '10px 16px', borderRadius: '8px', background: '#ff5a91', color: '#fff', border: 'none', cursor: 'pointer' }}
+        onClick={() => navigate("/page3")}
+      >
+        Bé muốn sửa lịch ạ
+      </button>
+
+      <span style={{ margin: '0 8px' }}></span>
+
+      <button
+        style={{ marginTop: '14px', padding: '10px 16px', borderRadius: '8px', background: '#ff5a91', color: '#fff', border: 'none', cursor: 'pointer' }}
+        onClick={() => navigate("/page7")}
+      >
+        Bé muốn xem tất cả lịch
+      </button>
       </div>
     </section>
   );
