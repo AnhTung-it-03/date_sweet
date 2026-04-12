@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const foods = [
   { id: 'nuong', label: 'Nướng', img: '/img/nuong.png' },
@@ -13,7 +13,18 @@ const foods = [
 ];
 
 export default function Page4() {
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState([]);
+
+  const goNext = () => {
+    if (selected.length === 0) {
+      alert('Chọn ít nhất một món ăn trước khi tiếp tục.');
+      return;
+    }
+    localStorage.setItem('page4Food', JSON.stringify(selected));
+    navigate('/page5');
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('page4Food');
@@ -41,17 +52,8 @@ export default function Page4() {
     );
   };
 
-  const goNext = () => {
-    if (selected.length === 0) {
-      alert('Chọn ít nhất một món ăn trước khi tiếp tục.');
-      return;
-    }
-    localStorage.setItem('page5Food', JSON.stringify(selected));
-    window.location.href = '/page5';
-  };
-
   return (
-    <section className="page page5">
+    <section className="page page4">
       <h1>Lựa món mà em thích điii nàaa?</h1>
       <p style={{ color: '#d83361', fontWeight: 700 }}>Chọn ít nhất 1 món rồi nhấn "Tiếp UWU" nhé.</p>
 
@@ -79,9 +81,9 @@ export default function Page4() {
       </div>
 
       <div style={{ marginTop: '12px' }}>
-         <button className="btn-primary" onClick={() => navigate('/page4')} >
-      <Link className='pr' to="/page5">Ấn vào đây nè bée ơi UWU</Link>
-        </button>
+          <button className="finish-btn" type="button" onClick={goNext}>
+            Tiếp UWU
+          </button>
       </div>
 
     </section>

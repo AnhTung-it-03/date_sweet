@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Page6() {
   const { user } = useAuth();
   const STORAGE_KEY = user ? `page7Itineraries_${user.domain}_${user.id}` : 'page7Itineraries';
   const [page3Calendar, setPage3Calendar] = useState([]);
-  const [page4Choice, setPage4Choice] = useState(null);
-  const [page5Food, setPage5Food] = useState([]);
+  const [page4Food, setPage4Food] = useState([]);
+  const [page5Choice, setPage5Choice] = useState(null);
   const [savedItineraries, setSavedItineraries] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const c3 = localStorage.getItem('page3Calendar');
     if (c3) setPage3Calendar(JSON.parse(c3));
 
-    const c4 = localStorage.getItem('page4Choice');
-    if (c4) setPage4Choice(JSON.parse(c4));
+    const c4 = localStorage.getItem('page4Food');
+    if (c4) setPage4Food(JSON.parse(c4));
 
-    const c5 = localStorage.getItem('page5Food');
-    if (c5) setPage5Food(JSON.parse(c5));
+    const c5 = localStorage.getItem('page5Choice');
+    if (c5) setPage5Choice(JSON.parse(c5));
 
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) setSavedItineraries(JSON.parse(stored));
@@ -36,22 +35,22 @@ export default function Page6() {
       return;
     }
 
-    if (!page4Choice || page4Choice.selected.length === 0) {
-      alert('Vui lòng chọn hoạt động ở Trang 4 trước khi xác nhận.');
+    if (page4Food.length === 0) {
+      alert('Vui lòng chọn món ăn ở Trang 4 trước khi xác nhận.');
       return;
     }
 
-    if (page5Food.length === 0) {
-      alert('Vui lòng chọn món ăn ở Trang 5 trước khi xác nhận.');
+    if (!page5Choice || page5Choice.selected.length === 0) {
+      alert('Vui lòng chọn hoạt động ở Trang 5 trước khi xác nhận.');
       return;
     }
 
     const newItineraries = page3Calendar.map((date) => ({
       id: `${date}-${Date.now()}`,
       dateTime: date,
-      activities: page4Choice.selected,
-      movieChoice: page4Choice.movieChoice || 'Không chọn',
-      foods: page5Food,
+      activities: page5Choice.selected,
+      movieChoice: page5Choice.movieChoice || 'Không chọn',
+      foods: page4Food,
       savedAt: new Date().toLocaleString('vi-VN'),
     }));
 
@@ -78,25 +77,25 @@ export default function Page6() {
           </ul>
         )}
 
-        <h3>2) Hoạt động </h3>
-        {page4Choice ? (
-          <div>
-            <p>Hoạt động: {page4Choice.selected.join(', ') || 'Chưa chọn'}</p>
-            <p>Hình thức xem phim: {page4Choice.movieChoice || 'Không chọn'}</p>
-          </div>
-        ) : (
-          <p>Chưa có lựa chọn hoạt động.</p>
-        )}
-
-        <h3>3) Món ăn</h3>
-        {page5Food.length === 0 ? (
-          <p>Chưa có món ăn được chọn.</p>
-        ) : (
+        <h3>2) Món ăn</h3>
+        {page4Food.length > 0 ? (
           <ul style={{ color: '#d83361' }}>
-            {page5Food.map((item) => (
+            {page4Food.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
+        ) : (
+          <p>Chưa có món ăn được chọn.</p>
+        )}
+
+        <h3>3) Hoạt động</h3>
+        {page5Choice ? (
+          <div>
+            <p>Hoạt động: {page5Choice.selected.join(', ') || 'Chưa chọn'}</p>
+            <p>Hình thức xem phim: {page5Choice.movieChoice || 'Không chọn'}</p>
+          </div>
+        ) : (
+          <p>Chưa có lựa chọn hoạt động.</p>
         )}
       </section>
 
@@ -111,7 +110,7 @@ export default function Page6() {
       <section style={{ marginTop: '16px', maxWidth: '680px', marginLeft: 'auto', marginRight: 'auto' }}>
        
         {savedItineraries.length === 0 ? (
-          <p>Chưa có dữ liệu ở Page 7. Nhấn xác nhận để đổ lịch vào Page 7.</p>
+          <p>Chưa có dữ liệu ở Page 7. Nhấn xác nhận để lưu lịch vào cơ sở dữ liệu.</p>
         ) : (
           <p style={{ color: '#d83361', fontWeight: 700 }}>
           Bé có tổng cộng {savedItineraries.length} Lịch với anh iuuu.
