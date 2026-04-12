@@ -16,7 +16,7 @@ function AppContent() {
     <div className="app">
       <header style={{ position: 'relative' }}>
         <img
-          src="/logo.png"
+          src="/download.png"
           alt="Logo"
           style={{
             position: 'absolute',
@@ -34,12 +34,12 @@ function AppContent() {
             {user ? `Người dùng: ${user.username} (${user.domain})` : 'Chưa đăng nhập'}
           </span>
           <Link to="/">Trang đầu</Link>
-          <Link to="/page2">Trang 2</Link>
+          {/* <Link to="/page2">Trang 2</Link>
           <Link to="/page3">Trang 3</Link>
           <Link to="/page4">Trang 4</Link>
           <Link to="/page5">Trang 5</Link>
           <Link to="/page6">Trang 6</Link>
-          <Link to="/page7">Trang 7</Link>
+          <Link to="/page7">Trang 7</Link> */}
           {user && <button onClick={logout} style={{ marginLeft: '10px', background: '#ef476f', color: 'white', border: 'none', borderRadius: '4px', padding: '5px 10px' }}>Đăng xuất</button>}
         </nav>
       </header>
